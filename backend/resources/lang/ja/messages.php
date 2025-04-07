@@ -1,0 +1,95 @@
+<?php
+
+return [
+    // Common
+    'common' => [
+        'new' => '新規登録',
+        'edit' => '編集',
+        'delete' => '削除',
+        'back' => '戻る',
+        'update' => '更新',
+        'save' => '保存',
+        'cancel' => 'キャンセル',
+        'confirm' => '確認',
+        'search' => '検索',
+        'clear_search' => '検索条件をクリアする',
+        'actions' => '操作',
+        'yes' => 'はい',
+        'no' => 'いいえ',
+        'select' => '選択してください',
+        'create' => '登録',
+        'showing' => '表示中',
+        'to' => '～',
+        'of' => '件目 / 全',
+        'entries' => '件',
+    ],
+
+    // Customer
+    'customer' => [
+        'title' => '取引先一覧',
+        'create_title' => '取引先新規作成',
+        'edit_title' => '取引先編集',
+        'customer_id' => '取引先コード',
+        'customer_name' => '取引先名',
+        'address' => '住所',
+        'customer_type' => '取引先種別',
+        'customer_type_supplier' => '仕入先',
+        'customer_type_client' => '得意先',
+        'closing_date' => '締日',
+        'closing_date_end' => '月末',
+        'closing_date_day' => '日',
+        'create_success' => '取引先を登録しました。',
+        'update_success' => '取引先を更新しました。',
+        'delete_success' => '取引先を削除しました。',
+        'delete_confirm' => '本当に削除しますか？',
+    ],
+
+    // Item
+    'item' => [
+        'title' => '商品一覧',
+        'create_title' => '商品登録',
+        'edit_title' => '商品編集',
+        'item_no' => '商品コード',
+        'item_name' => '商品名',
+        'contract_type' => '契約種別',
+        'contract_type_rental' => '日極',
+        'contract_type_sale' => '販売',
+        'weight' => '重量(kg)',
+        'prices' => '単価情報',
+        'prices_daily' => '日極単価',
+        'prices_sale' => '販売単価',
+        'prices_basic' => '基本料単価',
+        'rank' => 'ランク',
+        'create_success' => '商品を登録しました。',
+        'update_success' => '商品を更新しました。',
+        'delete_success' => '商品を削除しました。',
+        'delete_confirm' => '本当に削除しますか？',
+        'item_info' => '商品情報',
+    ],
+
+    // Yard
+    'yard' => [
+        'title' => 'ヤード一覧',
+        'create_title' => '新規作成',
+        'edit_title' => 'ヤード編集',
+        'yard_info' => 'ヤード情報',
+        'code' => 'コード',
+        'name' => 'ヤード名',
+        'phone' => '電話番号',
+        'address' => '住所',
+        'create_success' => 'ヤードを登録しました。',
+        'update_success' => 'ヤードを更新しました。',
+        'delete_success' => 'ヤードを削除しました。',
+        'delete_confirm' => '本当に削除しますか？',
+    ],
+
+    // Validation
+    'validation' => [
+        'required' => ':attributeは必須です。',
+        'unique' => '指定の:attributeはすでに使用されています。',
+        'numeric' => ':attributeは数値で指定してください。',
+        'min' => ':attributeは:min以上にしてください。',
+        'max' => ':attributeは:max以下にしてください。',
+        'in' => '選択された:attributeは無効です。',
+    ],
+]; 
