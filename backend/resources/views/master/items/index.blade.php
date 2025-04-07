@@ -15,17 +15,17 @@
     </div>
 
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
     @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
     <!-- Import Modal -->
@@ -95,35 +95,37 @@
                     </thead>
                     <tbody>
                         @foreach($items as $item)
-                            <tr>
-                                <td>{{ $item->item_no }}</td>
-                                <td>{{ $item->item_name }}</td>
-                                <td>
-                                    @if($item->contract_type == '1')
-                                        {{ __('messages.item.contract_type_rental') }}
-                                    @else
-                                        {{ __('messages.item.contract_type_sale') }}
-                                    @endif
-                                </td>
-                                <td>{{ $item->weight }}</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="{{ route('master.items.edit', $item->item_no) }}" class="btn btn-sm btn-primary">
-                                            <i class="bi bi-pencil text-white"></i>
-                                        </a>
-                                        <form action="{{ route('master.items.destroy', $item->item_no) }}" 
-                                              method="POST" 
-                                              onsubmit="return confirm('{{ __('messages.item.delete_confirm') }}');"
-                                              style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash text-white"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{ $item->item_no }}</td>
+                            <td>{{ $item->item_name }}</td>
+                            <td>
+                                @if($item->contract_type == '1')
+                                レンタル
+                                @elseif($item->contract_type == '2')
+                                販売
+                                @else
+                                {{ $item->contract_type }}
+                                @endif
+                            </td>
+                            <td>{{ $item->weight }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('master.items.edit', $item->item_no) }}" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil text-white"></i>
+                                    </a>
+                                    <form action="{{ route('master.items.destroy', $item->item_no) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('{{ __('messages.item.delete_confirm') }}');"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash text-white"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -143,6 +145,7 @@
         margin-bottom: 0;
         justify-content: center;
     }
+
     .pagination .page-link {
         padding: 0.375rem 0.75rem;
         color: #0d6efd;
@@ -151,22 +154,26 @@
         min-width: 38px;
         text-align: center;
     }
+
     .pagination .page-item.active .page-link {
         background-color: #0d6efd;
         border-color: #0d6efd;
         color: #fff;
     }
+
     .pagination .page-link:hover {
         background-color: #e9ecef;
         border-color: #dee2e6;
         color: #0a58ca;
     }
+
     .pagination-info {
         color: #6c757d;
         font-size: 0.875rem;
         text-align: center;
         margin-bottom: 1rem;
     }
+
     .pagination-container {
         display: flex;
         flex-direction: column;
@@ -174,4 +181,4 @@
         margin-top: 1.5rem;
     }
 </style>
-@endsection 
+@endsection

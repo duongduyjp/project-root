@@ -83,6 +83,21 @@ return [
         'delete_confirm' => '本当に削除しますか？',
     ],
 
+    // Shelf
+    'shelf' => [
+        'title' => '棚一覧',
+        'create_title' => '新規作成',
+        'edit_title' => '棚編集',
+        'shelf_info' => '棚情報',
+        'shelf_id' => '棚コード',
+        'shelf_name' => '棚名',
+        'yard_name' => 'ヤード名',
+        'create_success' => '棚を登録しました。',
+        'update_success' => '棚を更新しました。',
+        'delete_success' => '棚を削除しました。',
+        'delete_confirm' => '本当に削除しますか？',
+    ],
+
     // Validation
     'validation' => [
         'required' => ':attributeは必須です。',
@@ -92,4 +107,4 @@ return [
         'max' => ':attributeは:max以下にしてください。',
         'in' => '選択された:attributeは無効です。',
     ],
-]; 
+];

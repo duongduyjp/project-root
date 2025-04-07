@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
+use App\Http\Controllers\Controller;
 use App\Models\Yard;
 use Illuminate\Http\Request;
 
@@ -72,4 +73,4 @@ class YardController extends Controller
         return redirect()->route('master.yard.index')
             ->with('success', __('messages.yard.deleted'));
     }
-} 
+}

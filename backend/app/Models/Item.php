@@ -31,7 +31,7 @@ class Item extends Model
         return [
             'item_no' => 'required|string|max:10|unique:items,item_no',
             'item_name' => 'required|string|max:100',
-            'contract_type' => 'required|in:1,2',
+            'contract_type' => 'required|in:レンタル,販売',
             'weight' => 'required|numeric|min:0',
             'prices' => 'required|array',
             'prices.daily' => 'required|array',
@@ -48,4 +48,4 @@ class Item extends Model
             'prices.basic.c' => 'required|numeric|min:0'
         ];
     }
-} 
+}

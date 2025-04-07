@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\ItemController;
-use App\Http\Controllers\YardController;
+use App\Http\Controllers\Master\YardController;
+use App\Http\Controllers\Master\ShelfController;
 
 Route::get('/', function () {
     return view('home');
@@ -36,6 +37,14 @@ Route::get('/stocks', function () {
 
 // Master routes
 Route::prefix('master')->name('master.')->group(function () {
+    // Shelf routes
+    Route::get('/shelf', [ShelfController::class, 'index'])->name('shelf.index');
+    Route::get('/shelf/create', [ShelfController::class, 'create'])->name('shelf.create');
+    Route::post('/shelf', [ShelfController::class, 'store'])->name('shelf.store');
+    Route::get('/shelf/{shelf}/edit', [ShelfController::class, 'edit'])->name('shelf.edit');
+    Route::put('/shelf/{shelf}', [ShelfController::class, 'update'])->name('shelf.update');
+    Route::delete('/shelf/{shelf}', [ShelfController::class, 'destroy'])->name('shelf.destroy');
+
     // Customer routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
@@ -63,6 +72,5 @@ Route::prefix('master')->name('master.')->group(function () {
 
     // Other master routes
     Route::get('/office', [MasterController::class, 'office'])->name('office');
-    Route::get('/shelf', [MasterController::class, 'shelf'])->name('shelf');
     Route::get('/car-type', [MasterController::class, 'carType'])->name('car_type');
 });

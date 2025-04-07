@@ -19,4 +19,12 @@ class Yard extends Model
     protected $primaryKey = 'yard_code';
     public $incrementing = false;
     protected $keyType = 'string';
-} 
+
+    /**
+     * Get the shelves for the yard.
+     */
+    public function shelves()
+    {
+        return $this->hasMany(Shelf::class);
+    }
+}
