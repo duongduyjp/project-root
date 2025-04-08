@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone');
-            $table->date('closing_date');
+            $table->integer('closing_date');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

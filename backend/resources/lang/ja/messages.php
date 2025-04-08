@@ -98,6 +98,24 @@ return [
         'delete_confirm' => '本当に削除しますか？',
     ],
 
+    // Site
+    'site' => [
+        'title' => '現場一覧',
+        'create_title' => '現場新規作成',
+        'edit_title' => '現場編集',
+        'site_info' => '現場情報',
+        'customer_name' => '取引先名',
+        'site_name' => '現場名',
+        'address' => '住所',
+        'phone' => '電話番号',
+        'closing_date' => '締日',
+        'status' => 'ステータス',
+        'customer_id' => '取引先コード',
+        'name' => '現場名',
+        'status_active' => '有効',
+        'status_inactive' => '無効',
+    ],
+
     // Validation
     'validation' => [
         'required' => ':attributeは必須です。',

@@ -76,11 +76,10 @@ Route::prefix('master')->name('master.')->group(function () {
     Route::get('/car-type', [MasterController::class, 'carType'])->name('car_type');
 
     // Site routes
-    Route::resource('sites', SiteController::class);
-    Route::get('/week1', [SiteController::class, 'index'])->name('week1.index');
-    Route::get('/week1/create', [SiteController::class, 'create'])->name('week1.create');
-    Route::post('/week1', [SiteController::class, 'store'])->name('week1.store');
-    Route::get('/week1/{site}/edit', [SiteController::class, 'edit'])->name('week1.edit');
-    Route::put('/week1/{site}', [SiteController::class, 'update'])->name('week1.update');
-    Route::delete('/week1/{site}', [SiteController::class, 'destroy'])->name('week1.destroy');
+    Route::get('/site', [SiteController::class, 'index'])->name('site.index');
+    Route::get('/site/create', [SiteController::class, 'create'])->name('site.create');
+    Route::post('/site', [SiteController::class, 'store'])->name('site.store');
+    Route::get('/site/{site}/edit', [SiteController::class, 'edit'])->name('site.edit');
+    Route::put('/site/{site}', [SiteController::class, 'update'])->name('site.update');
+    Route::delete('/site/{site}', [SiteController::class, 'destroy'])->name('site.destroy');
 });

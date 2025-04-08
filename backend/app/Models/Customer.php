@@ -22,9 +22,9 @@ class Customer extends Model
     protected $casts = [
         'closing_date' => 'integer',
     ];
-} 
 
-public function sites()
-{
-    return $this->hasMany(Site::class, 'customer_id');
+    public function sites()
+    {
+        return $this->hasMany(Site::class, 'customer_id');
+    }
 }
