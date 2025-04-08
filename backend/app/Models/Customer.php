@@ -23,3 +23,8 @@ class Customer extends Model
         'closing_date' => 'integer',
     ];
 } 
+
+public function sites()
+{
+    return $this->hasMany(Site::class, 'customer_id');
+}

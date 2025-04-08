@@ -46,10 +46,11 @@
 </style>
 
 <div class="container">
-    <div class="mb-4">
+    <div class="mb-4 d-flex justify-content-between align-items-center">
         <h1>棚一覧</h1>
+        <a href="{{ route('master.shelf.create') }}" class="btn btn-primary">{{ __('messages.common.new') }}</a>
     </div>
-
+    
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -87,7 +88,6 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title">棚リスト</h5>
-                <a href="{{ route('master.shelf.create') }}" class="btn btn-primary">新規作成</a>
             </div>
 
             <div class="table-responsive">

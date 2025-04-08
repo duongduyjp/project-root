@@ -6,13 +6,14 @@ use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\ItemController;
 use App\Http\Controllers\Master\YardController;
 use App\Http\Controllers\Master\ShelfController;
+use App\Http\Controllers\sites\SiteController;
+
+
+
+Route::resource('sites', SiteController::class);
 
 Route::get('/', function () {
     return view('home');
-});
-
-Route::get('/sites', function () {
-    return view('sites');
 });
 
 Route::get('/car', function () {
@@ -73,4 +74,13 @@ Route::prefix('master')->name('master.')->group(function () {
     // Other master routes
     Route::get('/office', [MasterController::class, 'office'])->name('office');
     Route::get('/car-type', [MasterController::class, 'carType'])->name('car_type');
+
+    // Site routes
+    Route::resource('sites', SiteController::class);
+    Route::get('/week1', [SiteController::class, 'index'])->name('week1.index');
+    Route::get('/week1/create', [SiteController::class, 'create'])->name('week1.create');
+    Route::post('/week1', [SiteController::class, 'store'])->name('week1.store');
+    Route::get('/week1/{site}/edit', [SiteController::class, 'edit'])->name('week1.edit');
+    Route::put('/week1/{site}', [SiteController::class, 'update'])->name('week1.update');
+    Route::delete('/week1/{site}', [SiteController::class, 'destroy'])->name('week1.destroy');
 });
