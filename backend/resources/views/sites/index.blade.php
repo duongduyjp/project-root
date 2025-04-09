@@ -40,11 +40,15 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-warning">{{ __('messages.common.edit') }}</a>
+                    <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-sm btn-primary">
+                        <i class="bi bi-pencil text-white"></i>
+                    </a>
                     <form action="{{ route('sites.destroy', $site->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">{{ __('messages.common.delete') }}</button>
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash text-white"></i>
+                        </button>
                     </form>
                 </td>
             </tr>
