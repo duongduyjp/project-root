@@ -1,0 +1,15 @@
+{
+    "php.validate.enable": true,
+    "php.validate.run": "onType",
+    "php.validate.executablePath": "docker",
+    "php.validate.executableArgs": ["exec", "app", "php"],
+    "php.debug.executablePath": "docker",
+    "php.debug.executableArgs": ["exec", "app", "php"],
+    "php.debug.ideKey": "VSCODE",
+    "php.debug.port": 9003,
+    "php.debug.xdebugSettings": {
+        "max_children": 128,
+        "max_data": 512,
+        "max_depth": 3
+    }
+}

@@ -48,6 +48,7 @@ class SiteController extends Controller
 
         $data = $request->all();
         $data['customer_name'] = $customer->customer_name;
+        $data['closing_date'] = (string)$request->closing_date;
 
         Site::create($data);
         return redirect()->route('sites.index')->with('success', 'Site created successfully');

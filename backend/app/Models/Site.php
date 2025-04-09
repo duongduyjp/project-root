@@ -16,10 +16,14 @@ class Site extends Model
         'status',
     ];
 
+    protected $casts = [
+        'closing_date' => 'integer',
+    ];
+
     public function customer()
-{
-    return $this->belongsTo(Customer::class, 'customer_id', 'customer_id');
-}
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'customer_id');
+    }
 }
 
 
