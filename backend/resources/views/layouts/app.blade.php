@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         .sidebar {
             min-height: 100vh;
@@ -66,30 +67,29 @@
             <div class="col-md-2 sidebar">
                 <div class="logo-container">
                     <div class="d-flex align-items-center">
-                        <img src="{{ asset('images/logo.png') }}" alt="販売レンタル">
-                        <h3 class="mb-0">販売レンタル</h3>
+                        <img src="{{ asset('images/nhim.jpg') }}" alt="Hĩn Hôi Học English">
+                        <h3 class="mb-0">Hĩn Hôi Học English</h3>
                     </div>
                 </div>
                 <nav class="nav flex-column">
-                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">ホーム</a>
-                    <a class="nav-link {{ request()->is('sites') ? 'active' : '' }}" href="/sites">現場</a>
-                    <a class="nav-link {{ request()->is('car') ? 'active' : '' }}" href="/car">配車</a>
-                    <a class="nav-link {{ request()->is('estimates') ? 'active' : '' }}" href="/estimates">見積もり</a>
-                    <a class="nav-link {{ request()->is('orders') ? 'active' : '' }}" href="/orders">受注出荷</a>
-                    <a class="nav-link {{ request()->is('acceptances') ? 'active' : '' }}" href="/acceptances">返却</a>
-                    <a class="nav-link {{ request()->is('stocks') ? 'active' : '' }}" href="/stocks">在庫</a>
-                    <a class="nav-link {{ request()->is('master*') ? 'active' : '' }}" href="#" id="masterMenu">
-                        マスタ
-                        <i class="bi bi-chevron-down"></i>
+                    <a class="nav-link {{ request()->is('topics*') ? 'active' : '' }}" href="{{ route('topics.index') }}">
+                        <i class="bi bi-book"></i> Chủ đề
                     </a>
-                    <div class="submenu" id="masterSubmenu">
-                        <a class="nav-link {{ request()->is('master/customer') ? 'active' : '' }}" href="/master/customer">取引先</a>
-                        <a class="nav-link {{ request()->is('master/items') ? 'active' : '' }}" href="/master/items">商品</a>
-                        <a class="nav-link {{ request()->is('master/office') ? 'active' : '' }}" href="/master/office">事業所</a>
-                        <a class="nav-link {{ request()->is('master/yard') ? 'active' : '' }}" href="/master/yard">ヤード</a>
-                        <a class="nav-link {{ request()->is('master/shelf') ? 'active' : '' }}" href="/master/shelf">棚</a>
-                        <a class="nav-link {{ request()->is('master/car-type') ? 'active' : '' }}" href="/master/car-type">車種</a>
-                    </div>
+                    <a class="nav-link {{ request()->is('vocabularies*') ? 'active' : '' }}" href="{{ route('vocabularies.index') }}">
+                        <i class="fas fa-language"></i> Từ vựng
+                    </a>
+                    <a class="nav-link {{ request()->is('games*') ? 'active' : '' }}" href="{{ route('games.index') }}">
+                        <i class="fas fa-gamepad"></i> Trò chơi đoán từ
+                    </a>
+                    <a class="nav-link {{ request()->is('listen-games*') ? 'active' : '' }}" href="{{ route('listen-games.index') }}">
+                        <i class="fas fa-volume-up"></i> Trò chơi nghe từ
+                    </a>
+                    <a class="nav-link {{ request()->is('match-game*') ? 'active' : '' }}" href="{{ route('match-game.index') }}">
+                        <i class="fas fa-link"></i> Trò chơi nối từ
+                    </a>
+                    <a class="nav-link {{ request()->is('magic-box*') ? 'active' : '' }}" href="{{ route('magic-box.index') }}">
+                        <i class="fas fa-gift"></i> Chiếc hộp thần kì
+                    </a>
                 </nav>
             </div>
             <div class="col-md-10 main-content">
@@ -98,14 +98,5 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.getElementById('masterMenu').addEventListener('click', function(e) {
-            e.preventDefault();
-            const submenu = document.getElementById('masterSubmenu');
-            const icon = this.querySelector('i');
-            submenu.classList.toggle('show');
-            icon.style.transform = submenu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-    </script>
 </body>
 </html> 

@@ -1,85 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MasterController;
-use App\Http\Controllers\Master\CustomerController;
-use App\Http\Controllers\Master\ItemController;
-use App\Http\Controllers\Master\YardController;
-use App\Http\Controllers\Master\ShelfController;
-use App\Http\Controllers\sites\SiteController;
-
-
-
-Route::resource('sites', SiteController::class);
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\VocabularyController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\ListenGameController;
+use App\Http\Controllers\MatchGameController;
+use App\Http\Controllers\MagicBoxGameController;
 
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/car', function () {
-    return view('car');
+Route::resource('topics', TopicController::class);
+Route::resource('vocabularies', VocabularyController::class);
+Route::get('vocabularies/{id}/practice', [VocabularyController::class, 'practice'])->name('vocabularies.practice');
+Route::get('topics/{topicId}/vocabularies', [VocabularyController::class, 'byTopic'])->name('topics.vocabularies');
+Route::post('vocabularies/import', [VocabularyController::class, 'import'])->name('vocabularies.import');
+
+// Game routes
+Route::prefix('games')->name('games.')->group(function () {
+    Route::get('/', [GameController::class, 'index'])->name('index');
+    Route::post('/start', [GameController::class, 'start'])->name('start');
+    Route::get('/play', [GameController::class, 'play'])->name('play');
+    Route::post('/guess', [GameController::class, 'guess'])->name('guess');
+    Route::get('/result', [GameController::class, 'result'])->name('result');
 });
 
-Route::get('/estimates', function () {
-    return view('estimates');
+// Listen Game routes
+Route::prefix('listen-games')->name('listen-games.')->group(function () {
+    Route::get('/', [ListenGameController::class, 'index'])->name('index');
+    Route::post('/start', [ListenGameController::class, 'start'])->name('start');
+    Route::get('/play', [ListenGameController::class, 'play'])->name('play');
+    Route::post('/guess', [ListenGameController::class, 'guess'])->name('guess');
+    Route::get('/result', [ListenGameController::class, 'result'])->name('result');
 });
 
-Route::get('/orders', function () {
-    return view('orders');
-});
+// Match Game routes
+Route::get('/match-game', [MatchGameController::class, 'index'])->name('match-game.index');
+Route::get('/match-game/play', [MatchGameController::class, 'play'])->name('match-game.play');
+Route::post('/match-game/submit', [MatchGameController::class, 'submit'])->name('match-game.submit');
 
-Route::get('/acceptances', function () {
-    return view('acceptances');
-});
-
-Route::get('/stocks', function () {
-    return view('stocks');
-});
-
-// Master routes
-Route::prefix('master')->name('master.')->group(function () {
-    // Shelf routes
-    Route::get('/shelf', [ShelfController::class, 'index'])->name('shelf.index');
-    Route::get('/shelf/create', [ShelfController::class, 'create'])->name('shelf.create');
-    Route::post('/shelf', [ShelfController::class, 'store'])->name('shelf.store');
-    Route::get('/shelf/{shelf}/edit', [ShelfController::class, 'edit'])->name('shelf.edit');
-    Route::put('/shelf/{shelf}', [ShelfController::class, 'update'])->name('shelf.update');
-    Route::delete('/shelf/{shelf}', [ShelfController::class, 'destroy'])->name('shelf.destroy');
-
-    // Customer routes
-    Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
-    Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/customer', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::put('/customer/{customer}', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
-
-    // Items
-    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-    Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
-    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-    Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
-    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
-    Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
-    Route::post('/items/import', [ItemController::class, 'import'])->name('items.import');
-
-    // Yard routes
-    Route::get('/yard', [YardController::class, 'index'])->name('yard.index');
-    Route::get('/yard/create', [YardController::class, 'create'])->name('yard.create');
-    Route::post('/yard', [YardController::class, 'store'])->name('yard.store');
-    Route::get('/yard/{yard}/edit', [YardController::class, 'edit'])->name('yard.edit');
-    Route::put('/yard/{yard}', [YardController::class, 'update'])->name('yard.update');
-    Route::delete('/yard/{yard}', [YardController::class, 'destroy'])->name('yard.destroy');
-
-    // Other master routes
-    Route::get('/office', [MasterController::class, 'office'])->name('office');
-    Route::get('/car-type', [MasterController::class, 'carType'])->name('car_type');
-
-    // Site routes
-    Route::get('/site', [SiteController::class, 'index'])->name('site.index');
-    Route::get('/site/create', [SiteController::class, 'create'])->name('site.create');
-    Route::post('/site', [SiteController::class, 'store'])->name('site.store');
-    Route::get('/site/{site}/edit', [SiteController::class, 'edit'])->name('site.edit');
-    Route::put('/site/{site}', [SiteController::class, 'update'])->name('site.update');
-    Route::delete('/site/{site}', [SiteController::class, 'destroy'])->name('site.destroy');
+// Magic Box Game routes
+Route::prefix('magic-box')->name('magic-box.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\MagicBoxGameController::class, 'index'])->name('index');
+    Route::post('/play', [\App\Http\Controllers\MagicBoxGameController::class, 'play'])->name('play');
 });
