@@ -7,6 +7,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ListenGameController;
 use App\Http\Controllers\MatchGameController;
 use App\Http\Controllers\MagicBoxGameController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('home');
@@ -46,3 +47,10 @@ Route::prefix('magic-box')->name('magic-box.')->group(function () {
     Route::get('/', [\App\Http\Controllers\MagicBoxGameController::class, 'index'])->name('index');
     Route::post('/play', [\App\Http\Controllers\MagicBoxGameController::class, 'play'])->name('play');
 });
+
+// Auth routes
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/dashboard', function () {
+    return 'Chào mừng bạn đến dashboard!';
+})->middleware('auth');
