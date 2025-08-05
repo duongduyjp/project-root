@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダッシュボード - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #34495e;
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background-color: #34495e;
+            border-left-color: #3498db;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            border-left-color: #95a5a6;
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(149, 165, 166, 0.3);
+        }
+
+        .nav-link.has-submenu {
+            font-weight: 600;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .nav-link.has-submenu:hover {
+            background-color: #34495e;
+            border-left-color: #3498db;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .submenu {
+            list-style: none;
+            margin-left: 20px;
+            display: none;
+            border-left: 1px solid #34495e;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .submenu.show {
+            display: block;
+        }
+
+        .nav-link.has-submenu {
+            position: relative;
+        }
+
+        .nav-link.has-submenu::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            transition: transform 0.3s;
+            color: #bdc3c7;
+        }
+
+        .nav-link.has-submenu.active::after {
+            transform: translateY(-50%) rotate(180deg);
+            color: #ffffff;
+        }
+
+        .nav-link.has-submenu.active {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            border-left-color: #95a5a6;
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(149, 165, 166, 0.3);
+        }
+
+        .submenu .nav-link {
+            padding: 8px 20px;
+            font-size: 14px;
+            color: #95a5a6;
+            border-left: 2px solid #34495e;
+        }
+
+        .submenu .nav-link:hover {
+            color: #ffffff;
+            background-color: #34495e;
+            border-left-color: #3498db;
+            font-weight: 500;
+        }
+
+        .submenu .submenu {
+            margin-left: 15px;
+        }
+
+        .submenu .submenu .nav-link {
+            padding: 6px 20px;
+            font-size: 13px;
+            color: #7f8c8d;
+            border-left: 2px solid #2c3e50;
+        }
+
+        .submenu .submenu .nav-link:hover {
+            color: #ffffff;
+            background-color: #34495e;
+            border-left-color: #3498db;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .content-area {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+
+        .placeholder {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 18px;
+            margin-top: 100px;
+        }
+
+        .placeholder h3 {
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        /* Wireframe elements */
+        .wireframe-box {
+            border: 2px dashed #bdc3c7;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+
+        .wireframe-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        .wireframe-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .wireframe-table th,
+        .wireframe-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .wireframe-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        /* KPI Section */
+        .kpi-section h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-left: 4px solid #3498db;
+        }
+
+        .kpi-icon {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .kpi-content h4 {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .kpi-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .kpi-change {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .kpi-change.positive {
+            color: #27ae60;
+        }
+
+        .kpi-change.negative {
+            color: #e74c3c;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .chart-container h4 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        /* Bar Chart */
+        .chart-placeholder {
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            height: 150px;
+            gap: 8px;
+        }
+
+        .bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            min-width: 30px;
+            transition: all 0.3s;
+        }
+
+        .bar:hover {
+            transform: scaleY(1.1);
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        /* Pie Chart */
+        .pie-chart {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .pie-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--color) 0deg calc(var(--percentage) * 3.6deg),
+                transparent calc(var(--percentage) * 3.6deg) 360deg
+            );
+        }
+
+        .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        /* Activity Section */
+        .activity-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .activity-section h4 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .activity-icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .activity-desc {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            color: #95a5a6;
+            font-size: 12px;
+        }
+
+        /* Actions Section */
+        .actions-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .actions-section h4 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .action-icon {
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy tất cả các link có submenu
+            const submenuLinks = document.querySelectorAll('.nav-link.has-submenu');
+            
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Tìm submenu gần nhất
+                    const submenu = this.nextElementSibling;
+                    if (submenu && submenu.classList.contains('submenu')) {
+                        // Toggle submenu
+                        submenu.classList.toggle('show');
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Tự động mở submenu khi có link active
+            const activeLink = document.querySelector('.nav-link[href="send-message.html"]');
+            if (activeLink) {
+                // Mở submenu cha
+                const parentSubmenu = activeLink.closest('.submenu');
+                if (parentSubmenu) {
+                    parentSubmenu.classList.add('show');
+                    const parentLink = parentSubmenu.previousElementSibling;
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
+                }
+                // Mở submenu ông
+                const grandParentSubmenu = parentSubmenu.closest('.submenu');
+                if (grandParentSubmenu) {
+                    grandParentSubmenu.classList.add('show');
+                    const grandParentLink = grandParentSubmenu.previousElementSibling;
+                    if (grandParentLink) {
+                        grandParentLink.classList.add('active');
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>ダッシュボード</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">ユーザー管理</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link has-submenu">ユーザー詳細</a>
+                            <ul class="submenu">
+                                <li><a href="prescription-history.html" class="nav-link">処方履歴表示</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">タグ・スコア管理</a>
+                    <ul class="submenu">
+                        <li><a href="rule-settings.html" class="nav-link">ルール設定</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">メッセージ配信管理</a>
+                    <ul class="submenu">
+                        <li><a href="send-message.html" class="nav-link">セグメント配信設定</a></li>
+                        <li><a href="#" class="nav-link">ステップ配信設定（例：問診完了 24h 後通知）</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">フォーム管理</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link">フォーム作成</a></li>
+                        <li><a href="#" class="nav-link">回答一覧／分析</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">分析ダッシュボード</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link">KPI 表示（処方→再問診率等）／CSV 出力</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-submenu">設定画面</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link">ユーザー権限設定</a></li>
+                        <li><a href="#" class="nav-link">言語設定（初期はベトナム語固定）</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2>ダッシュボード</h2>
+                <div class="breadcrumb">ホーム > ダッシュボード</div>
+            </div>
+
+            <div class="content-area">
+                <div class="dashboard-grid">
+                    <!-- KPI Cards -->
+                    <div class="kpi-section">
+                        <h3>📊 KPI サマリー</h3>
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <div class="kpi-icon">👥</div>
+                                <div class="kpi-content">
+                                    <h4>総ユーザー数</h4>
+                                    <div class="kpi-value">1,247</div>
+                                    <div class="kpi-change positive">+12.5%</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">📝</div>
+                                <div class="kpi-content">
+                                    <h4>フォーム回答数</h4>
+                                    <div class="kpi-value">892</div>
+                                    <div class="kpi-change positive">+8.3%</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">📊</div>
+                                <div class="kpi-content">
+                                    <h4>完了率</h4>
+                                    <div class="kpi-value">78.5%</div>
+                                    <div class="kpi-change negative">-2.1%</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-icon">💰</div>
+                                <div class="kpi-content">
+                                    <h4>収益</h4>
+                                    <div class="kpi-value">¥2.4M</div>
+                                    <div class="kpi-change positive">+15.2%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="charts-section">
+                        <div class="chart-container">
+                            <h4>📈 ユーザー成長率</h4>
+                            <div class="chart-placeholder">
+                                <div class="chart-bars">
+                                    <div class="bar" style="height: 60%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 75%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 45%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 90%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 65%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 80%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                    <div class="bar" style="height: 95%; background: linear-gradient(to top, #3498db, #2980b9);"></div>
+                                </div>
+                                <div class="chart-labels">
+                                    <span>1月</span>
+                                    <span>2月</span>
+                                    <span>3月</span>
+                                    <span>4月</span>
+                                    <span>5月</span>
+                                    <span>6月</span>
+                                    <span>7月</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <h4>🍩 回答分布</h4>
+                            <div class="pie-chart">
+                                <div class="pie-segment" style="--percentage: 45; --color: #3498db;"></div>
+                                <div class="pie-segment" style="--percentage: 30; --color: #e74c3c;"></div>
+                                <div class="pie-segment" style="--percentage: 25; --color: #f39c12;"></div>
+                                <div class="pie-center">
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            <div class="pie-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>完了 (45%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>進行中 (30%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #f39c12;"></span>
+                                    <span>未開始 (25%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-section">
+                        <h4>📋 最近のアクティビティ</h4>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">👤</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">新規ユーザー登録</div>
+                                    <div class="activity-desc">田中太郎さんが登録しました</div>
+                                    <div class="activity-time">2時間前</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📝</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">フォーム回答完了</div>
+                                    <div class="activity-desc">佐藤花子さんが健康診断フォームを完了</div>
+                                    <div class="activity-time">4時間前</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📊</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">レポート生成</div>
+                                    <div class="activity-desc">月次レポートが自動生成されました</div>
+                                    <div class="activity-time">1日前</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="actions-section">
+                        <h4>⚙️ クイックアクション</h4>
+                        <div class="action-buttons">
+                            <a href="#" class="action-btn">
+                                <span class="action-icon">👤</span>
+                                <span>新規ユーザー作成</span>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <span class="action-icon">📝</span>
+                                <span>フォーム作成</span>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <span class="action-icon">📊</span>
+                                <span>レポート生成</span>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <span class="action-icon">📧</span>
+                                <span>メッセージ配信</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

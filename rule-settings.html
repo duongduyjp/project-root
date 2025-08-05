@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルール設定 - Wireframe</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; color: #333; }
+        .container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: #2c3e50; color: white; padding: 20px 0; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+        .logo { padding: 0 20px 20px; border-bottom: 1px solid #34495e; margin-bottom: 20px; }
+        .logo h1 { font-size: 24px; font-weight: bold; }
+        .nav-menu { list-style: none; }
+        .nav-item { margin-bottom: 5px; }
+        .nav-link { display: block; padding: 12px 20px; color: #ecf0f1; text-decoration: none; transition: all 0.3s; border-left: 3px solid transparent; font-weight: 500; }
+        .nav-link:hover { background-color: #34495e; border-left-color: #3498db; color: #ffffff; font-weight: 500; }
+        .nav-link.active { background: linear-gradient(135deg, #95a5a6, #7f8c8d); border-left-color: #95a5a6; color: #ffffff; font-weight: 600; box-shadow: 0 2px 4px rgba(149, 165, 166, 0.3); }
+        .nav-link.has-submenu { font-weight: 600; color: #ffffff; position: relative; }
+        .nav-link.has-submenu:hover { background-color: #34495e; border-left-color: #3498db; color: #ffffff; font-weight: 500; }
+        .nav-link.has-submenu::after { content: '▼'; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 12px; transition: transform 0.3s; color: #bdc3c7; }
+        .nav-link.has-submenu.active::after { transform: translateY(-50%) rotate(180deg); color: #ffffff; }
+        .nav-link.has-submenu.active { background: linear-gradient(135deg, #95a5a6, #7f8c8d); border-left-color: #95a5a6; color: #ffffff; font-weight: 600; box-shadow: 0 2px 4px rgba(149, 165, 166, 0.3); }
+        .submenu { list-style: none; margin-left: 20px; display: none; border-left: 1px solid #34495e; margin-top: 5px; margin-bottom: 5px; }
+        .submenu.show { display: block; }
+        .submenu .nav-link {
+            padding: 8px 20px;
+            font-size: 14px;
+            color: #95a5a6;
+            border-left: 2px solid #34495e;
+        }
+
+        .submenu .nav-link:hover,
+        .submenu .nav-link.active {
+            color: #fff;
+            background-color: #34495e;
+            border-left-color: #3498db;
+            font-weight: 500;
+        }
+        .submenu .submenu { margin-left: 15px; }
+        .submenu .submenu .nav-link { padding: 6px 20px; font-size: 13px; color: #7f8c8d; border-left: 2px solid #2c3e50; }
+        .submenu .submenu .nav-link:hover { color: #ffffff; background-color: #34495e; border-left-color: #3498db; font-weight: 500; }
+        .main-content { flex: 1; padding: 30px; }
+        .header { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .header h2 { color: #2c3e50; margin-bottom: 10px; }
+        .breadcrumb { color: #7f8c8d; font-size: 14px; }
+        .content-area { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        /* Tag Table */
+        .section-title { font-size: 20px; color: #2c3e50; margin-bottom: 18px; font-weight: 600; }
+        .tag-search-row { display: flex; gap: 16px; margin-bottom: 18px; }
+        .tag-search-row input, .tag-search-row select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .tag-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .tag-table th, .tag-table td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+        .tag-table th { background: #f8f9fa; color: #2c3e50; font-weight: 600; }
+        .tag-table tr:hover { background: #f8f9fa; }
+        .tag-icon { font-size: 18px; margin-right: 8px; }
+        .tag-actions button { background: none; border: none; cursor: pointer; font-size: 16px; margin-right: 8px; }
+        .tag-actions button:last-child { margin-right: 0; }
+        .tag-actions .edit { color: #f39c12; }
+        .tag-actions .delete { color: #e74c3c; }
+        /* Rule Form */
+        .rule-section { margin-top: 40px; }
+        .rule-form-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .rule-form-table th, .rule-form-table td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+        .rule-form-table th { background: #f8f9fa; color: #2c3e50; font-weight: 600; }
+        .rule-form-table td select, .rule-form-table td input { padding: 7px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .add-rule-btn { background: #3498db; color: white; border: none; border-radius: 4px; padding: 8px 16px; font-size: 14px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        .add-rule-btn:hover { background: #2980b9; }
+        .rule-list { margin-top: 20px; }
+        .rule-item { background: #f8f9fa; border-radius: 6px; padding: 12px 18px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+        .rule-item .rule-desc { color: #2c3e50; font-size: 15px; }
+        .rule-item .delete-rule-btn { background: none; border: none; color: #e74c3c; font-size: 16px; cursor: pointer; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; }
+            .content-area { padding: 10px; }
+            .main-content { padding: 10px; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Submenu click
+            const submenuLinks = document.querySelectorAll('.nav-link.has-submenu');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const submenu = this.nextElementSibling;
+                    if (submenu && submenu.classList.contains('submenu')) {
+                        submenu.classList.toggle('show');
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+            // Auto open for rule-settings
+            const activeLink = document.querySelector('.nav-link[href="rule-settings.html"]');
+            if (activeLink) {
+                const parentSubmenu = activeLink.closest('.submenu');
+                if (parentSubmenu) {
+                    parentSubmenu.classList.add('show');
+                    const parentLink = parentSubmenu.previousElementSibling;
+                    if (parentLink) parentLink.classList.add('active');
+                }
+                const grandParentSubmenu = parentSubmenu.closest('.submenu');
+                if (grandParentSubmenu) {
+                    grandParentSubmenu.classList.add('show');
+                    const grandParentLink = grandParentSubmenu.previousElementSibling;
+                    if (grandParentLink) grandParentLink.classList.add('active');
+                }
+            }
+            // Tag search filter (simple demo)
+            document.getElementById('tag-search').addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                document.querySelectorAll('.tag-table tbody tr').forEach(row => {
+                    const tag = row.querySelector('.tag-name').textContent.toLowerCase();
+                    row.style.display = tag.includes(value) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>ダッシュボード</h1>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard-wireframe.html" class="nav-link">ダッシュボード</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">ユーザー管理</a>
+                <ul class="submenu">
+                    <li><a href="#" class="nav-link has-submenu">ユーザー詳細</a>
+                        <ul class="submenu">
+                            <li><a href="prescription-history.html" class="nav-link">処方履歴表示</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">タグ・スコア管理</a>
+                <ul class="submenu">
+                    <li><a href="rule-settings.html" class="nav-link active">ルール設定</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">メッセージ配信管理</a>
+                <ul class="submenu">
+                    <li><a href="#" class="nav-link">セグメント配信設定</a></li>
+                    <li><a href="#" class="nav-link">ステップ配信設定（例：問診完了 24h 後通知）</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">フォーム管理</a>
+                <ul class="submenu">
+                    <li><a href="#" class="nav-link">フォーム作成</a></li>
+                    <li><a href="#" class="nav-link">回答一覧／分析</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">分析ダッシュボード</a>
+                <ul class="submenu">
+                    <li><a href="#" class="nav-link">KPI 表示（処方→再問診率等）／CSV 出力</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link has-submenu">設定画面</a>
+                <ul class="submenu">
+                    <li><a href="#" class="nav-link">ユーザー権限設定</a></li>
+                    <li><a href="#" class="nav-link">言語設定（初期はベトナム語固定）</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h2>ルール設定</h2>
+            <div class="breadcrumb">ホーム > タグ・スコア管理 > ルール設定</div>
+        </div>
+        <div class="content-area">
+            <!-- Tag List Section -->
+            <div>
+                <div class="section-title">🏷️ 現在のタグ一覧</div>
+                <button class="add-rule-btn" style="margin-bottom:18px;">＋ 新しいタグを追加</button>
+                <table class="tag-table">
+                    <thead>
+                        <tr>
+                            <th>🏷️ Tag Name</th>
+                            <th>📝 Description</th>
+                            <th>🛠 Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tag-name"><span class="tag-icon">🏷️</span>ho</td>
+                            <td>Người có triệu chứng ho</td>
+                            <td class="tag-actions">
+                                <button class="edit" title="Edit">✏️ Edit</button>
+                                <button class="delete" title="Delete">🗑 Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tag-name"><span class="tag-icon">🏷️</span>sốt</td>
+                            <td>Người có triệu chứng sốt</td>
+                            <td class="tag-actions">
+                                <button class="edit" title="Edit">✏️ Edit</button>
+                                <button class="delete" title="Delete">🗑 Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tag-name"><span class="tag-icon">🏷️</span>đã問診</td>
+                            <td>Người đã hoàn thành問診</td>
+                            <td class="tag-actions">
+                                <button class="edit" title="Edit">✏️ Edit</button>
+                                <button class="delete" title="Delete">🗑 Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Rule Setting Section -->
+            <div class="rule-section">
+                <div class="section-title">📋 ルール設定（自動タグ付与）</div>
+                <button class="add-rule-btn" style="margin-bottom:18px;">＋ 新しいルールを追加</button>
+                <table class="rule-form-table">
+                    <thead>
+                        <tr>
+                            <th>条件 (IF)</th>
+                            <th>アクション (THEN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trả lời câu hỏi 3 là "ho"</td>
+                            <td>Gắn tag "ho"</td>
+                        </tr>
+                        <tr>
+                            <td>Đã hoàn tất問診</td>
+                            <td>Gắn tag "đã問診"</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng đơn thuốc &gt; 2</td>
+                            <td>Gắn tag "khách VIP"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 
